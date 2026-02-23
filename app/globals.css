@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-paper: #f7f5ee;
+  --color-accent: #495286;
+  --color-ink: #000000;
+
+  --font-trajan: "Trajan Pro", "Times New Roman", Times, serif;
+  --font-avenir: Avenir, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+:root {
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
+}
+
+@media (prefers-color-scheme: dark) {
+  /* No dark mode for now as per design spec */
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-avenir);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-title {
+  font-family: var(--font-trajan);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.bg-accent {
+  background-color: var(--color-accent);
+}
