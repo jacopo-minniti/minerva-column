@@ -1,0 +1,46 @@
+{
+  "sofija-joksimovic": {
+    "name": "Sofija Joksimovic",
+    "image": "/images/authors/sofija.jpeg"
+  },
+  "camila-lopez": {
+    "name": "Camila López",
+    "image": "/images/authors/camila.jpeg"
+  },
+  "the-column": {
+    "name": "The Column",
+    "image": "/images/authors/column-logo.png"
+  },
+  "kajsa-falsen": {
+    "name": "Kajsa Falsen",
+    "image": "/images/authors/kajsa.jpeg"
+  },
+  "miray-ozmutlu": {
+    "name": "Miray Ozmutlu",
+    "image": "/images/authors/miray.jpeg"
+  },
+  "daniya-ishankulova": {
+    "name": "Daniya Ishankulova",
+    "image": "/images/authors/daniya.jpeg"
+  },
+  "clara-tripodi": {
+    "name": "Clara Tripodi",
+    "image": "/images/authors/clara.jpeg"
+  },
+  "jacopo-minniti": {
+    "name": "Jacopo Minniti",
+    "image": "/images/authors/jacopo.JPG"
+  },
+  "sophie-bird": {
+    "name": "Sophie Bird",
+    "image": "/images/authors/sophie.jpeg"
+  },
+  "elena-cura": {
+    "name": "Elena Cura",
+    "image": "/images/authors/clara.jpeg"
+  },
+  "jiayuan-tian": {
+    "name": "Jiayuan Tian",
+    "image": "/images/authors/jiayuan.jpeg"
+  }
+}

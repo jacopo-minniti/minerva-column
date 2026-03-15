@@ -19,10 +19,11 @@ export default function Navbar() {
 
                 {/* Center: Navigation Links */}
                 <div className="flex flex-wrap justify-center space-x-6 md:space-x-8 text-sm uppercase tracking-wider font-trajan font-semibold text-gray-800">
-                    <Link href="/minerva-cities" className="hover:text-accent transition-colors">Minerva Cities</Link>
-                    <Link href="/opinions" className="hover:text-accent transition-colors">Opinions</Link>
-                    <Link href="/science" className="hover:text-accent transition-colors">Science</Link>
-                    <Link href="/fun-things" className="hover:text-accent transition-colors">Fun Things</Link>
+                    <Link href="/opinions" className="hover:text-accent transition-colors">Opinion</Link>
+                    <Link href="/institution" className="hover:text-accent transition-colors">Institution</Link>
+                    <Link href="/cities" className="hover:text-accent transition-colors">Cities</Link>
+                    <Link href="/culture" className="hover:text-accent transition-colors">Culture</Link>
+                    <Link href="/fun" className="hover:text-accent transition-colors">Fun</Link>
                     <Link href="/about-us" className="hover:text-accent transition-colors">About Us</Link>
                 </div>
 

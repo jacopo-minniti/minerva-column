@@ -4,6 +4,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import Link from "next/link";
 import { CopyButton } from "@/components/CopyButton";
+import { stripMarkdown } from "@/lib/utils";
 import { TableOfContents } from "@/components/TableOfContents";
 import remarkGfm from "remark-gfm";
 
@@ -90,15 +91,17 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
                 <div className="relative z-10 h-full w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center pt-20">
                     <div className="w-full">
-                        <p className="text-sm font-avenir font-bold text-white uppercase tracking-widest mb-4 drop-shadow-md [text-shadow:0_1px_2px_rgba(0,0,0,0.5)] [-webkit-text-stroke:0.1px_rgba(0,0,0,0.2)]">
-                            {article.meta.category}
-                        </p>
-                        <h1 className="text-4xl md:text-7xl font-trajan font-bold text-white leading-tight mb-6 [text-shadow:2px_2px_4px_rgba(0,0,0,0.5)] [-webkit-text-stroke:0.4px_rgba(0,0,0,0.4)] break-words">
+                        <div className="mb-6">
+                            <span className="inline-block bg-accent text-white px-4 py-1.5 rounded-full text-sm md:text-base font-avenir font-bold uppercase tracking-widest shadow-md">
+                                {article.meta.category}
+                            </span>
+                        </div>
+                        <h1 className="text-4xl md:text-7xl font-trajan font-bold text-white leading-tight mb-6 [text-shadow:2px_2px_8px_rgba(0,0,0,0.7)] [-webkit-text-stroke:0.8px_rgba(0,0,0,0.6)] break-words">
                             {article.meta.title}
                         </h1>
                         {article.meta.description && (
-                            <p className="text-lg md:text-xl font-avenir text-white/95 leading-relaxed italic [text-shadow:1px_1px_2px_rgba(0,0,0,0.5)] [-webkit-text-stroke:0.2px_rgba(0,0,0,0.2)] break-words max-w-5xl">
-                                {article.meta.description}
+                            <p className="text-lg md:text-2xl font-avenir text-white leading-relaxed italic [text-shadow:1px_1px_4px_rgba(0,0,0,0.6)] [-webkit-text-stroke:0.3px_rgba(0,0,0,0.4)] break-words max-w-5xl">
+                                {stripMarkdown(article.meta.description)}
                             </p>
                         )}
                     </div>
@@ -136,11 +139,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                     {/* End of Article: Author Signature */}
                     <div className="mt-12 flex flex-col items-center text-center">
                         <div className="flex flex-col items-center gap-6">
-                            {article.meta.authorImage ? (
+                            {article.meta.author.image ? (
                                 <div className="relative w-32 h-32 rounded-full overflow-hidden shadow-xl border-4 border-white">
                                     <Image
-                                        src={article.meta.authorImage}
-                                        alt={article.meta.author}
+                                        src={article.meta.author.image}
+                                        alt={article.meta.author.name}
                                         fill
                                         className="object-cover"
                                     />
@@ -148,7 +151,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                             ) : null}
                             <span className="text-2xl font-trajan text-ink font-bold tracking-tight italic">
                                 <span className="text-gray-500 font-avenir text-lg mr-2 font-normal not-italic">Written by</span>
-                                {article.meta.author}
+                                {article.meta.author.name}
                             </span>
                         </div>
                     </div>
@@ -162,23 +165,23 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                             Author
                         </h3>
                         <div className="flex items-center space-x-4">
-                            {article.meta.authorImage ? (
+                            {article.meta.author.image ? (
                                 <div className="w-14 h-14 relative rounded-sm overflow-hidden shadow-sm border border-gray-100">
                                     <Image
-                                        src={article.meta.authorImage}
-                                        alt={article.meta.author}
+                                        src={article.meta.author.image}
+                                        alt={article.meta.author.name}
                                         fill
                                         className="object-cover"
                                     />
                                 </div>
                             ) : (
                                 <div className="w-14 h-14 bg-accent text-white flex items-center justify-center font-trajan text-xl font-bold rounded-sm shadow-sm">
-                                    {article.meta.author.charAt(0)}
+                                    {article.meta.author.name.charAt(0)}
                                 </div>
                             )}
                             <div>
                                 <span className="text-xs font-avenir text-gray-500 italic block mb-1">Written by</span>
-                                <span className="text-lg font-trajan text-ink font-semibold leading-tight">{article.meta.author}</span>
+                                <span className="text-lg font-trajan text-ink font-semibold leading-tight">{article.meta.author.name}</span>
                             </div>
                         </div>
                     </div>
@@ -197,7 +200,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                                             {post.meta.title}
                                         </h4>
                                     </Link>
-                                    <p className="text-sm font-avenir text-accent mt-1 transition-colors">{post.meta.author}</p>
+                                    <p className="text-sm font-avenir text-accent mt-1 transition-colors">{post.meta.author.name}</p>
                                 </div>
                             ))}
                         </div>
@@ -208,11 +211,12 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                         <h3 className="text-lg font-trajan font-bold text-accent uppercase tracking-wider border-b-2 border-accent mb-4 pb-2">
                             Categories
                         </h3>
-                        <ul className="list-disc pl-5 font-avenir text-accent space-y-2">
-                            <li><Link href="/minerva-cities" className="hover:underline">The cities</Link></li>
-                            <li><Link href="/opinions" className="hover:underline">Opinions</Link></li>
-                            <li><Link href="/science" className="hover:underline">Science</Link></li>
-                            <li><Link href="/fun-things" className="hover:underline">Fun Things</Link></li>
+                        <ul className="list-disc pl-5 font-avenir text-accent space-y-2 uppercase text-xs tracking-widest font-bold">
+                            <li><Link href="/opinions" className="hover:underline">Opinion</Link></li>
+                            <li><Link href="/institution" className="hover:underline">Institution</Link></li>
+                            <li><Link href="/cities" className="hover:underline">Cities</Link></li>
+                            <li><Link href="/culture" className="hover:underline">Culture</Link></li>
+                            <li><Link href="/fun" className="hover:underline">Fun</Link></li>
                         </ul>
                     </div>
 

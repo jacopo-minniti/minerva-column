@@ -1,5 +1,5 @@
-import ComingSoonPage from "@/components/ComingSoon";
+import CategoryPage from "@/components/CategoryPage";
 
 export default function OpinionsPage() {
-    return <ComingSoonPage />;
+    return <CategoryPage category="Opinion" title="Opinion" />;
 }

@@ -1,29 +1,40 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getAllArticles } from "@/lib/api";
+import { getAllArticles, getFeaturedConfig } from "@/lib/api";
+import { stripMarkdown } from "@/lib/utils";
 
 export default function Home() {
-  const articles = getAllArticles();
+  const allArticles = getAllArticles();
+  const featuredConfig = getFeaturedConfig();
 
-  if (!articles || articles.length === 0) {
+  if (!allArticles || allArticles.length === 0) {
     return <div className="p-8 text-center text-accent font-avenir">No articles found. Check your /content/articles folder.</div>;
   }
 
-  // Pick first article for main feature
-  const mainArticle = articles[0];
-  const sideArticles = articles.slice(1, 4);
+  // 1. Top Article (from featured.json or fallback to most recent)
+  const topSlug = featuredConfig.home.top;
+  const mainArticle = allArticles.find(a => a.meta.slug === topSlug) || allArticles[0];
+
+  // 2. Recent Articles (next 3 most recent, excluding main)
+  const otherArticles = allArticles.filter(a => a.meta.slug !== mainArticle.meta.slug);
+  const sideArticles = otherArticles.slice(0, 3);
+
+  // 3. Random Bottom Articles (7 random from remaining)
+  const remainingArticles = otherArticles.slice(3);
+  const bottomArticles = [...remainingArticles]
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 7);
 
   return (
     <div className="py-4">
       {/* Newspaper Header Line */}
       <div className="flex justify-between items-center border-t-2 border-b-2 border-accent py-2 mb-8 text-sm font-trajan font-bold text-gray-700 tracking-widest uppercase">
-        <span>Sunday, February 22</span>
+        <span>{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</span>
         <span>The University Daily Est. 2025</span>
-        <span>Volume I</span>
+        <span>Volume II</span>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-8">
-
+      <div className="flex flex-col lg:flex-row gap-8 mb-12">
         {/* Left column: Main Feature */}
         <div className="lg:w-2/3 flex flex-col pr-0 lg:pr-8 lg:border-r border-gray-300">
           <h2 className="text-xl font-avenir font-bold mb-4 flex items-center tracking-wider text-ink">
@@ -31,7 +42,6 @@ export default function Home() {
           </h2>
 
           <Link href={`/articles/${mainArticle.meta.slug}`} className="group relative block mb-4">
-            {/* Aspect Video provides a nice 16:9 box */}
             <div className="w-full aspect-video bg-gray-200 relative overflow-hidden flex items-center justify-center">
               {mainArticle.meta.coverImage ? (
                 <Image
@@ -53,16 +63,15 @@ export default function Home() {
           </Link>
 
           <p className="text-sm font-avenir text-gray-500 uppercase font-semibold tracking-wider mb-2">
-            By <span className="text-accent">{mainArticle.meta.author}</span> • {new Date(mainArticle.meta.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            By <span className="text-accent">{mainArticle.meta.author.name}</span> • {new Date(mainArticle.meta.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
           </p>
 
           <p className="font-avenir text-gray-700 leading-relaxed text-lg mb-6">
-            {/* Extract first paragraph from MDX for excerpt or just a snippet */}
-            {mainArticle.content.split('\n').find(line => line.length > 50 && !line.startsWith('#'))?.substring(0, 180) || 'Click to read the full story.'}...
+            {stripMarkdown(mainArticle.content.split('\n').find(line => line.length > 50 && !line.startsWith('#')) || '').substring(0, 180) || 'Click to read the full story.'}...
           </p>
         </div>
 
-        {/* Right Column: Opinion / Secondary Articles */}
+        {/* Right Column: Recent Articles */}
         <div className="lg:w-1/3 flex flex-col pl-0 lg:pl-4">
           <h2 className="text-xl font-avenir font-bold mb-4 flex items-center tracking-wider text-ink">
             RECENT <span className="ml-1 text-gray-400">›</span>
@@ -80,20 +89,59 @@ export default function Home() {
                   </h3>
                 </Link>
                 <p className="text-xs font-avenir text-gray-500 uppercase font-semibold tracking-wider mb-2">
-                  By <span className="text-accent">{article.meta.author}</span> • {new Date(article.meta.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                  By <span className="text-accent">{article.meta.author.name}</span> • {new Date(article.meta.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                 </p>
                 <p className="text-sm font-avenir text-gray-700 leading-relaxed line-clamp-3">
-                  {article.content.split('\n').find(line => line.length > 30 && !line.startsWith('#'))?.substring(0, 100) || 'Read more...'}...
+                  {stripMarkdown(article.content.split('\n').find(line => line.length > 30 && !line.startsWith('#')) || '').substring(0, 100) || 'Read more...'}...
                 </p>
               </div>
             ))}
           </div>
-
         </div>
-
       </div>
+
+      {/* Bottom Section: Varied Layout Articles */}
+      {bottomArticles.length > 0 && (
+        <div className="pt-12 mt-8 border-t-2 border-ink">
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-12 lg:gap-16">
+            {bottomArticles.map((article, index) => {
+              const showImage = index % 2 === 0 && article.meta.coverImage;
+              return (
+                <div key={article.meta.slug} className="break-inside-avoid mb-16 flex flex-col border-t border-gray-300 pt-6">
+                  {showImage && (
+                    <Link href={`/articles/${article.meta.slug}`} className="block mb-6 overflow-hidden relative w-full aspect-[3/2] bg-gray-100 group">
+                      <Image
+                        src={article.meta.coverImage!}
+                        alt={article.meta.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </Link>
+                  )}
+                  <div className="flex flex-col flex-grow">
+                    <Link href={`/articles/${article.meta.slug}`} className="group">
+                      <h4 className="text-xs font-avenir font-bold text-accent uppercase tracking-widest mb-3">{article.meta.category}</h4>
+                      <h3 className="text-2xl font-trajan font-bold text-ink group-hover:text-accent transition-colors mb-4 leading-tight">
+                        {article.meta.title}
+                      </h3>
+                    </Link>
+                    <p className="text-xs font-avenir text-gray-500 uppercase mb-4 font-semibold">
+                      {article.meta.author.name} • {new Date(article.meta.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    </p>
+                  <p className="text-base font-avenir text-gray-700 leading-relaxed line-clamp-4 mt-auto">
+                    {stripMarkdown(article.content.split('\n').find(line => line.length > 40 && !line.startsWith('#')) || '').substring(0, 150) || 'Read more...'}...
+                  </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Background Graphic */}
       <div
-        className="fixed top-0 right-[-10vw] md:right-0 w-[60vw] md:w-[40vw] h-screen bg-no-repeat bg-right-top bg-contain opacity-15 pointer-events-none -z-10"
+        className="fixed top-0 right-[-10vw] md:right-0 w-[60vw] md:w-[40vw] h-screen bg-no-repeat bg-right-top bg-contain opacity-12 pointer-events-none -z-10"
         style={{
           backgroundImage: "url('/background.png')",
           maskImage: 'linear-gradient(to right, transparent, black 70%)',
