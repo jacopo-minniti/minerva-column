@@ -141,23 +141,6 @@ export default function AboutUsPage() {
                         </h3>
                     </div>
 
-                    {/* Last Issue List */}
-                    <section className="space-y-8">
-                        <h2 className="text-2xl font-trajan italic font-bold border-b border-ink/10 pb-2">Check out our last issue!</h2>
-                        <ul className="space-y-6 font-trajan italic text-gray-800 text-sm leading-tight">
-                            {[
-                                "Impeachment Is a Relief But Nothing to Celebrate.",
-                                "AI Statement: No AI Was Used For This Article",
-                                "Loneliness in the Name of Self-Care",
-                                "A Tangle of Words, Woven by Mind",
-                                "Meet Me at the A.P.T or I Will Drag You There: The Reality of Sexual Harassment in Seoul",
-                                "Don&apos;t Skip the Line",
-                                "L.A. Fires: Look Out For the Shock Doctrine"
-                            ].map((topic, i) => (
-                                <li key={i} className="hover:text-accent cursor-pointer transition-colors border-b border-ink/5 pb-2">
-                                    {topic}
-                                </li>
-                            ))}
                         </ul>
                     </section>
 
