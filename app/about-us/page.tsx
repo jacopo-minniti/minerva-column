@@ -82,9 +82,9 @@ export default function AboutUsPage() {
                                 <ul className="space-y-2 font-avenir text-gray-700">
                                     <li className="flex gap-2 items-start">• <span>All things Minerva-related</span></li>
                                     <li className="flex gap-2 items-start">• <span>Opinion pieces</span></li>
-                                    <li className="flex gap-2 items-start">• <span>Appiphanies from the rotation cities</span></li>
+                                    <li className="flex gap-2 items-start">• <span>Epiphanies  from your rotation city</span></li>
                                     <li className="flex gap-2 items-start">• <span>Refurbished LBAs</span></li>
-                                    <li className="flex gap-2 items-start">• <span>Reports from the institution</span></li>
+                                    <li className="flex gap-2 items-start">• <span>Reports on the institution</span></li>
                                     <li className="flex gap-2 items-start">• <span>Cartoons</span></li>
                                     <li className="flex gap-2 items-start">• <span>+more!</span></li>
                                 </ul>
