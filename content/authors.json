@@ -11,6 +11,10 @@
     "name": "The Column",
     "image": "/images/authors/column-logo.png"
   },
+  "emilia-kochanowicz": {
+    "name": "Emilia Kochanowicz",
+    "image": "/images/authors/column-logo.png"
+  },
   "haya-elmizwghi": {
     "name": "Haya Elmizwghi",
     "image": "/images/authors/haya.jpeg"
@@ -51,5 +55,4 @@
     "name": "Asta Nuka Fruelund Gabriel", 
     "image": "/images/authors/column-logo.png", 
   }
-
 }
