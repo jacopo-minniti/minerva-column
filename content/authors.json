@@ -50,5 +50,9 @@
   "jiayuan-tian": {
     "name": "Jiayuan Tian",
     "image": "/images/authors/jiayuan.jpeg"
+  }, 
+  "asta-nuka-fruelund-gabriel":{
+    "name": "Asta Nuka Fruelund Gabriel", 
+    "image": "/images/authors/column-logo.png", 
   }
 }
