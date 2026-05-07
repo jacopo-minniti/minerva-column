@@ -84,7 +84,7 @@ export default function AboutUsPage() {
                                     <li className="flex gap-2 items-start">• <span>Opinion pieces</span></li>
                                     <li className="flex gap-2 items-start">• <span>Epiphanies from the rotation cities</span></li>
                                     <li className="flex gap-2 items-start">• <span>Refurbished LBAs</span></li>
-                                    <li className="flex gap-2 items-start">• <span>Reports from the institution</span></li>
+                                    <li className="flex gap-2 items-start">• <span>Reports on the institution</span></li>
                                     <li className="flex gap-2 items-start">• <span>Cartoons</span></li>
                                     <li className="flex gap-2 items-start">• <span>+more!</span></li>
                                 </ul>
