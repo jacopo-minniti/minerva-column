@@ -46,7 +46,7 @@ export default function AboutUsPage() {
 
                         <div className="space-y-6 text-lg leading-relaxed md:pr-40 lg:pr-48 relative z-10">
                             <p>
-                                The Minerva column was established by M27s in their second year during rotation in Seoul. Our mission is to create a space for Minervans to exchange critical ideas, refine their arguments, reflect on their experiences, and examine the institution&apos;s actions. We&rsquo;ve seen how easy it is for tensions to flare or opinions to get flattened in fast-moving chats. This is our attempt at slowing down, thinking carefully, and engaging generously.
+                                The Minerva column was established in 2025 by M27s in their second year during rotation in Seoul. Our mission is to create a space for Minervans to exchange critical ideas, refine their arguments, reflect on their experiences, and examine the institution&apos;s actions. We&rsquo;ve seen how easy it is for tensions to flare or opinions to get flattened in fast-moving chats. This is our attempt at slowing down, thinking carefully, and engaging generously.
                             </p>
                             
                             <p>
@@ -82,7 +82,7 @@ export default function AboutUsPage() {
                                 <ul className="space-y-2 font-avenir text-gray-700">
                                     <li className="flex gap-2 items-start">• <span>All things Minerva-related</span></li>
                                     <li className="flex gap-2 items-start">• <span>Opinion pieces</span></li>
-                                    <li className="flex gap-2 items-start">• <span>Appiphanies from the rotation cities</span></li>
+                                    <li className="flex gap-2 items-start">• <span>Epiphanies from the rotation cities</span></li>
                                     <li className="flex gap-2 items-start">• <span>Refurbished LBAs</span></li>
                                     <li className="flex gap-2 items-start">• <span>Reports from the institution</span></li>
                                     <li className="flex gap-2 items-start">• <span>Cartoons</span></li>
@@ -141,25 +141,6 @@ export default function AboutUsPage() {
                         </h3>
                     </div>
 
-                    {/* Last Issue List */}
-                    <section className="space-y-8">
-                        <h2 className="text-2xl font-trajan italic font-bold border-b border-ink/10 pb-2">Check out our last issue!</h2>
-                        <ul className="space-y-6 font-trajan italic text-gray-800 text-sm leading-tight">
-                            {[
-                                "Impeachment Is a Relief But Nothing to Celebrate.",
-                                "AI Statement: No AI Was Used For This Article",
-                                "Loneliness in the Name of Self-Care",
-                                "A Tangle of Words, Woven by Mind",
-                                "Meet Me at the A.P.T or I Will Drag You There: The Reality of Sexual Harassment in Seoul",
-                                "Don&apos;t Skip the Line",
-                                "L.A. Fires: Look Out For the Shock Doctrine"
-                            ].map((topic, i) => (
-                                <li key={i} className="hover:text-accent cursor-pointer transition-colors border-b border-ink/5 pb-2">
-                                    {topic}
-                                </li>
-                            ))}
-                        </ul>
-                    </section>
 
                     {/* Website Outreach */}
                     <section className="space-y-6 py-6 border-t border-ink/5">
@@ -178,4 +159,40 @@ export default function AboutUsPage() {
             <div className="h-20"></div>
         </div>
     );
-}
+    {/* Corrections Policy */}
+<section className="space-y-8 pt-10 border-t border-ink/10">
+    <h2 className="text-4xl font-trajan font-bold text-accent uppercase tracking-wide">
+        Corrections Policy
+    </h2>
+
+    <div className="space-y-6 text-lg leading-relaxed">
+        <p>
+            Found any mistakes in our work? Please reach out to a member of the editorial board
+            or email us at{" "}
+            <a
+                href="mailto:theminervacolumn@gmail.com"
+                className="font-bold hover:text-accent transition-colors"
+            >
+                theminervacolumn@gmail.com
+            </a>.
+        </p>
+
+        <p>
+            We are committed to accuracy in our reporting and aim to correct mistakes quickly.
+        </p>
+
+        <p>
+            When a correction is necessary, it will be explained in a <strong>corrections box</strong> 
+            under the updated version on our website, as well as with a note in the next printed issue.
+        </p>
+
+      <p>
+    Read our full{" "}
+    <a
+        href="//about-us/about-us/editorial-guidelines
+        className="text-accent font-trajan font-bold underline hover:opacity-80"
+    >
+        editorial guidelines here
+    </a>{"/about-us/editorial-guidelines"}
+    for more details.
+</p>
